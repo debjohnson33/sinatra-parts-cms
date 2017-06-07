@@ -29,6 +29,10 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get	'/parts/index' do
+		erb :'/parts/index'
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
