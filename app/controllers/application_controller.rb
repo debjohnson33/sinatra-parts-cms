@@ -18,11 +18,12 @@ class ApplicationController < Sinatra::Base
 	end
 	
 	post '/signup' do
-		@user = User.create(username: params[:username], email: params[:email], password: params[password])
+	#	raise params.inspect
+		@user = User.create(username: params[:username], email: params[:email], password: params[:password])
 		@session = session
 		@session[:user_id] = @user.id
 		if logged_in? && !params[:username].empty? && !params[:password].empty? && !params[:email].empty?
-			redirect '/index'
+			redirect '/parts/index'
 		else
 			redirect '/signup'
 		end
