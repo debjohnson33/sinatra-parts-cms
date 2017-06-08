@@ -55,6 +55,10 @@ class ApplicationController < Sinatra::Base
     	redirect '/login'
 	end
 
+	get '/new' do
+		erb :'/parts/new'
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
