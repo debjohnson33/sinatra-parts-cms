@@ -1,10 +1,11 @@
 <h2>Parts for <%= @user.username %></h2>
-<br></br>
+<br />
 <% @parts.each do |part| %>
- Name: <%= part.name %>
- Manufacturer: <%= part.manufacturer %>
- Serial Number: <%= part.serial_number %>
- Quantity: <%= part.quantity %>
+ Name: <%= part.name %><br />
+ Manufacturer: <%= part.manufacturer %><br />
+ Serial Number: <%= part.serial_number %><br />
+ Quantity: <%= part.quantity %><br />
+ <br></br>
 <% end %>
 
 <br></br>
