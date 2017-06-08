@@ -50,6 +50,11 @@ class ApplicationController < Sinatra::Base
 		erb :'/parts/index'
 	end
 
+	get '/logout' do
+    	session.delete(:user_id)
+    	redirect '/login'
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
