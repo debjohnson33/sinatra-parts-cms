@@ -70,6 +70,15 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/parts/:id' do
+		if logged_in? && current_user
+			@part = Part.find_by_id(params[:id])
+			erb :'/parts/show'
+		else
+			redirect '/login'
+		end
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
