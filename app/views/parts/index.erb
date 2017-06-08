@@ -1,1 +1,8 @@
-Index
+<h2>Parts for <%= @user.username %></h2>
+<br></br>
+<% @parts.each do |part| %>
+ Name: <%= part.name %>
+ Manufacturer: <%= part.manufacturer %>
+ Serial Number: <%= part.serial_number %>
+ Quantity: <%= part.quantity %>
+<% end %>

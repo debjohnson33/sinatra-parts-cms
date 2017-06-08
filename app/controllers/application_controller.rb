@@ -45,6 +45,8 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get	'/parts/index' do
+		@user = current_user
+		@parts = @user.parts
 		erb :'/parts/index'
 	end
 
