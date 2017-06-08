@@ -29,6 +29,10 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/login' do
+		erb :'users/login'
+	end
+
 	get	'/parts/index' do
 		erb :'/parts/index'
 	end
