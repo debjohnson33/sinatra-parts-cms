@@ -59,6 +59,17 @@ class ApplicationController < Sinatra::Base
 		erb :'/parts/new'
 	end
 
+	post '/new' do
+		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
+			redirect '/new'
+		else
+			@user = current_user
+			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer], user_id: session[:user_id])
+			@part.save
+			redirect '/parts/index'				
+		end
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
