@@ -47,6 +47,7 @@ class ApplicationController < Sinatra::Base
 	get	'/parts/index' do
 		@user = current_user
 		@parts = @user.parts
+		@manufacturers = Manufacturer.all
 		erb :'/parts/index'
 	end
 
