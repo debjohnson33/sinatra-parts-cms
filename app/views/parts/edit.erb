@@ -14,4 +14,12 @@
 	<br></br>
 	
 	<input type="submit" name="submit" value="Save">
+	<br></br>
+
+</form>
+
+<form action="/parts/<%= @part.id %>/delete" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" name="submit" value="Delete Part">
+	
 </form>
