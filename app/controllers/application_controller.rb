@@ -56,15 +56,17 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/new' do
+		@manufacturers = Manufacturer.all
 		erb :'/parts/new'
 	end
 
 	post '/new' do
-		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
+		raise params.inspect
+		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty?
 			redirect '/new'
 		else
 			@user = current_user
-			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer], user_id: session[:user_id])
+			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], user_id: session[:user_id])
 			@part.save
 			redirect '/parts/index'				
 		end

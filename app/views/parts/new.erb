@@ -7,9 +7,12 @@
 	<input type="text" name="serial_number" id="serial_number"><br></br>
 	<label>Quantity: </label>
 	<input type="integer" name="quantity" id="quantity"><br></br>
-	<label>Manufacturer: </label>
-	<input type="text" name="manufacturer" id="manufacturer"><br></br>
 
+	<h2>Manufacturers:</h2>
+	<% @manufacturers.all.each do |manufacturer| %>
+		<li><input type="checkbox" id="manufacturer_<%= manufacturer.id%>" name="part[manufacturer_ids][]" value="<%= manufacturer.id %>"><%= manufacturer.name %></input></li>
+	<% end %>
+	<br></br>
 	<input type="submit" name="submit" value="Submit">
 
 </form>
