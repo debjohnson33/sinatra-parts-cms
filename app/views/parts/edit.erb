@@ -1,1 +1,17 @@
-Got here
+<h2>Edit the Part</h2>
+
+<form action="/parts/<%= @part.id %>" methode="post">
+	<input type="hidden" name="_method" value="patch">
+
+	<label>Part Name: </label>
+	<input type="text" name="name" id="name" value="<%= @part.name %>"><br></br>
+	<label>Serial Number: </label>
+	<input type="text" name="serial_number" id="serial_number" value="<%= @part.serial_number %>"><br></br>
+	<label>Quantity: </label>
+	<input type="integer" name="quantity" id="quantity" value="<%= @part.quantity %>"><br></br>
+	<label>Manufacturer: </label>
+	<input type="text" name="manufacturer" id="manufacturer" value="<%= @part.manufacturer %>">
+	<br></br>
+	
+
+</form>
