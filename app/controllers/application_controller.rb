@@ -18,7 +18,6 @@ class ApplicationController < Sinatra::Base
 	end
 	
 	post '/signup' do
-	#	raise params.inspect
 		@user = User.create(username: params[:username], email: params[:email], password: params[:password])
 		@session = session
 		@session[:user_id] = @user.id
@@ -47,7 +46,6 @@ class ApplicationController < Sinatra::Base
 	get	'/parts/index' do
 		@user = current_user
 		@parts = @user.parts
-		@manufacturers = Manufacturer.all
 		erb :'/parts/index'
 	end
 
@@ -57,27 +55,17 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/new' do
-		@manufacturers = Manufacturer.all
 		erb :'/parts/new'
 	end
 
 	post '/new' do
 		# raise params.inspect
-		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty?
+		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
 			redirect '/new'
 		else
 			@user = current_user
-			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], user_id: session[:user_id])
+			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer], user_id: session[:user_id])
 			@part.save
-			if params[:part][:manufacturer_ids]
-				@manufacturer = Manufacturer.find_by_id(params[:part][:manufacturer_ids])
-				@manufacturer.save
-				PartManufacturer.create(part_id: @part.id, manufacturer_id: @manufacturer.id)
-			else
-				@manufacturer = Manufacturer.new(name: params[:manufacturer][:name])
-				@manufacturer.save
-				PartManufacturer.create(part_id: part.id, manufacturer_id: @manufacturer.id)
-			end
 			redirect '/parts/index'				
 		end
 	end
