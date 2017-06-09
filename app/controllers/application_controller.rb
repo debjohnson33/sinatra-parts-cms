@@ -98,7 +98,18 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
-	
+	delete '/parts/:id' do
+		if current_user
+			@part = Part.find_by_id(params[:id])
+			if @part.user_id == session[:user_id]
+				@part.destroy
+				redirect '/parts/index'
+			end
+		else
+			redirect '/login'
+		end
+	end
+
 
 	helpers do
 	    def logged_in?
