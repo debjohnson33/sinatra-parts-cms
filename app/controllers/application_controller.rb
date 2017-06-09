@@ -79,6 +79,11 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/parts/:id/edit' do
+		@part = Part.find_by_id(params[:id])
+		erb :'/parts/edit'
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
