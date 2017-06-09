@@ -13,6 +13,10 @@
 		<li><input type="checkbox" id="manufacturer_<%= manufacturer.id%>" name="part[manufacturer_ids][]" value="<%= manufacturer.id %>"><%= manufacturer.name %></input></li>
 	<% end %>
 	<br></br>
+	<h2>Or Create a New Manufacturer:</h2>
+		<input type="text" name="manufacturer[name]" id="new_manufacturer">
+
+	<br></br>
 	<input type="submit" name="submit" value="Submit">
 
 </form>

@@ -61,13 +61,22 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post '/new' do
-		raise params.inspect
+		# raise params.inspect
 		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty?
 			redirect '/new'
 		else
 			@user = current_user
 			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], user_id: session[:user_id])
 			@part.save
+			if params[:part][:manufacturer_ids]
+				@manufacturer = Manufacturer.find_by_id(params[:part][:manufacturer_ids])
+				@manufacturer.save
+				PartManufacturer.create(part_id: @part.id, manufacturer_id: @manufacturer.id)
+			else
+				@manufacturer = Manufacturer.new(name: params[:manufacturer][:name])
+				@manufacturer.save
+				PartManufacturer.create(part_id: part.id, manufacturer_id: @manufacturer.id)
+			end
 			redirect '/parts/index'				
 		end
 	end
