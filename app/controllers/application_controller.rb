@@ -84,6 +84,17 @@ class ApplicationController < Sinatra::Base
 		erb :'/parts/edit'
 	end
 
+	patch '/parts/:id' do
+		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
+			redirect '/parts/edit'
+		else
+			@part = Part.find_by_id(params[:id])
+			@part.update(params[:part])
+			@part.save
+			redirect "/parts/#{@part.id}"
+		end
+	end
+
 	helpers do
 	    def logged_in?
 	      !!session[:user_id]
