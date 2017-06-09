@@ -89,7 +89,10 @@ class ApplicationController < Sinatra::Base
 			redirect '/parts/edit'
 		else
 			@part = Part.find_by_id(params[:id])
-			@part.update(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer])
+			@part.name = params[:name] 
+			@part.serial_number = params[:serial_number]
+			@part.quantity = params[:quantity]
+			@part.manufacturer = params[:manufacturer]
 			@part.save
 			redirect "/parts/#{@part.id}"
 		end
