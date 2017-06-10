@@ -72,6 +72,7 @@ use Rack::Flash
 			@user = current_user
 			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], user_id: session[:user_id])
 			@manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer])
+			UserManufacturers.create(user_id: @user.id, manufacturer_id: @manufacturer.id)
 			@part.manufacturer_id = @manufacturer.id
 			@part.save
 			flash[:message] = "Successfully created part."
@@ -90,7 +91,13 @@ use Rack::Flash
 
 	get '/parts/:id/edit' do
 		@part = Part.find_by_id(params[:id])
-		erb :'/parts/edit'
+		@user = current_user
+		if @user.user_id == @part.user_id
+			erb :'/parts/edit'
+		else
+			flash[:message] = "You do not have permission to edit this part."
+			redirect '/parts/index'
+		end
 	end
 
 	patch '/parts/:id' do
