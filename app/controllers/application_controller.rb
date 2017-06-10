@@ -1,6 +1,9 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+
+use Rack::Flash
 
 	configure do
 		set :public_folder, 'public'
@@ -24,6 +27,7 @@ class ApplicationController < Sinatra::Base
 		if logged_in? && !params[:username].empty? && !params[:password].empty? && !params[:email].empty?
 			redirect '/parts/index'
 		else
+			flash[:message] = "You must have username, email, and password to sign up. Please fill in all three."
 			redirect '/signup'
 		end
 	end
