@@ -70,7 +70,9 @@ use Rack::Flash
 			redirect '/new'
 		else
 			@user = current_user
-			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer], user_id: session[:user_id])
+			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], user_id: session[:user_id])
+			@manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer])
+			@part.manufacturer_id = @manufacturer.id
 			@part.save
 			flash[:message] = "Successfully created part."
 			redirect '/parts/index'				
