@@ -6,7 +6,7 @@
 <br />
 <% @parts.each do |part| %>
  Name: <%= part.name %><br />
- Manufacturer: <%= part.manufacturer %> <br />
+ Manufacturer: <%= part.manufacturer.name %> <br />
  Serial Number: <%= part.serial_number %><br />
  Quantity: <%= part.quantity %><br />
  <br></br>
