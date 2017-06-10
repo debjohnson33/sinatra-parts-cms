@@ -10,7 +10,7 @@
 	<label>Quantity: </label>
 	<input type="integer" name="quantity" id="quantity" value="<%= @part.quantity %>"><br></br>
 	<label>Manufacturer: </label>
-	<input type="text" name="manufacturer" id="manufacturer" value="<%= @part.manufacturer %>">
+	<input type="text" name="manufacturer" id="manufacturer" value="<%= @part.manufacturer.name %>">
 	<br></br>
 	
 	<input type="submit" name="submit" value="Save">

@@ -92,7 +92,7 @@ use Rack::Flash
 	get '/parts/:id/edit' do
 		@part = Part.find_by_id(params[:id])
 		@user = current_user
-		if @user.user_id == @part.user_id
+		if @user.id == @part.user_id
 			erb :'/parts/edit'
 		else
 			flash[:message] = "You do not have permission to edit this part."
@@ -104,9 +104,15 @@ use Rack::Flash
 		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
 			redirect '/parts/edit'
 		else
+			@user = current_user
 			@part = Part.find_by_id(params[:id])
-			@part.update(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer])
-			
+			@part.update(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity])
+			@manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer])
+			UserManufacturers.update(user_id: @user.id, manufacturer_id: @manufacturer.id)
+			@part.manufacturer_id = @manufacturer.id
+			@part.save
+
+			flash[:message] = "Part updated successfully."
 			redirect "/parts/#{@part.id}"
 		end
 	end
