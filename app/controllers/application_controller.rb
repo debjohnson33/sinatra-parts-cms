@@ -43,6 +43,7 @@ use Rack::Flash
 			@session[:user_id] = @user.id
 			redirect '/parts/index'
 		else
+			 flash[:message] = "That username and/or password did not match what we have on record. Please try again."
 			erb :'/users/login'
 		end
 	end
@@ -93,11 +94,8 @@ use Rack::Flash
 			redirect '/parts/edit'
 		else
 			@part = Part.find_by_id(params[:id])
-			@part.name = params[:name] 
-			@part.serial_number = params[:serial_number]
-			@part.quantity = params[:quantity]
-			@part.manufacturer = params[:manufacturer]
-			@part.save
+			@part.update(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer])
+			
 			redirect "/parts/#{@part.id}"
 		end
 	end
