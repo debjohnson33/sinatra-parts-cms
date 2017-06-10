@@ -66,11 +66,13 @@ use Rack::Flash
 	post '/new' do
 		# raise params.inspect
 		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
+			flash[:message] = "Please fill in all information."
 			redirect '/new'
 		else
 			@user = current_user
 			@part = Part.new(name: params[:name], serial_number: params[:serial_number], quantity: params[:quantity], manufacturer: params[:manufacturer], user_id: session[:user_id])
 			@part.save
+			flash[:message] = "Successfully created part."
 			redirect '/parts/index'				
 		end
 	end

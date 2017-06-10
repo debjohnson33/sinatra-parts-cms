@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Enter Your New Part: </h2>
 
 <form action="/new" method="post">

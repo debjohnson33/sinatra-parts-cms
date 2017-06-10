@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Parts for <%= @user.username %></h2>
 <br />
 <% @parts.each do |part| %>
