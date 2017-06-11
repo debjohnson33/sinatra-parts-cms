@@ -6,6 +6,7 @@ class ApplicationController < Sinatra::Base
 use Rack::Flash
 
 	configure do
+		set :static, true
 		set :public_folder, 'public'
 		set :views, 'app/views'
 		enable :sessions
