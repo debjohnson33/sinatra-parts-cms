@@ -49,6 +49,7 @@ class PartsController < ApplicationController
 
 	patch '/parts/:id' do
 		if params[:name].empty? || params[:serial_number].empty? || params[:quantity].empty? || params[:manufacturer].empty?
+			flash[:message] = "Please fill in all information."
 			redirect '/parts/edit'
 		else
 			@user = current_user
