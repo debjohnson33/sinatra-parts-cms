@@ -19,7 +19,7 @@ use Rack::Flash
 
 	helpers do
 	    def logged_in?
-	      !!session[:user_id]
+	      !!current_user
 	    end
 
 	    def current_user
