@@ -1,5 +1,5 @@
 class PartsController < ApplicationController
-		get	'/parts/index' do
+	get	'/parts/index' do
 		@user = current_user
 		@parts = @user.parts
 		erb :'/parts/index'

@@ -4,13 +4,29 @@ class UsersController < ApplicationController
 	end
 	
 	post '/signup' do
-		@user = User.create(username: params[:username], email: params[:email], password: params[:password])
-		@session = session
-		@session[:user_id] = @user.id
-		if logged_in? && !params[:username].empty? && !params[:password].empty? && !params[:email].empty?
+		errors = Hash.new
+		
+		if params[:username].empty?
+			errors[:username] = "Username should not be blank"
+		elsif User.find_by(username: params[:username])
+			errors[:username] = "Username is already taken"
+		end
+
+		if params[:email].empty?
+			errors[:email] = "Email should not be blank"
+		elsif User.find_by(email: params[:email])
+			errors[:email] = "Email is already being used"
+		end
+
+		if params[:password].empty?
+			errors[:password] = "Password should not be blank"
+		end
+
+		if errors.empty?
+			@user = User.create(username: params[:username], email: params[:email], password: [:password])
 			redirect '/parts/index'
 		else
-			flash[:message] = "You must have username, email, and password to sign up. Please fill in all three."
+			flash[:message] = errors
 			redirect '/signup'
 		end
 	end
@@ -22,8 +38,7 @@ class UsersController < ApplicationController
 	post '/login' do
 		@user = User.find_by(username: params[:username])
 		if @user && @user.authenticate(params[:password])
-			@session = session
-			@session[:user_id] = @user.id
+			session[:user_id] = @user.id
 			redirect '/parts/index'
 		else
 			 flash[:message] = "That username and/or password did not match what we have on record. Please try again."
@@ -36,3 +51,5 @@ class UsersController < ApplicationController
     	redirect '/login'
 	end
 end
+
+

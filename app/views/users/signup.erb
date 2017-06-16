@@ -1,19 +1,29 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+
 
 <h2>Sign up:</h2>
 
 <form action="/signup" method="post">
 
 	<label>Username:</label>
+
 	<input type="text" name="username" id="username">
+	<% if flash.has?(:message) && flash[:message][:username] %>
+  		<%= flash[:message][:username] %>
+	<% end %>
 	<br><br/>
 	<label>Email:</label>
+
 	<input type="text" name="email" id="email">
+	<% if flash.has?(:message) && flash[:message][:email] %>
+  		<%= flash[:message][:email] %>
+	<% end %>
 	<br><br/>
 	<label>Password:</label>
+
 	<input type="password" name="password" id="password">
+	<% if flash.has?(:message) && flash[:message][:password] %>
+  		<%= flash[:message][:password] %>
+	<% end %>
 	<br><br/>
 	
 	<input type="submit" name="submit" value="Submit">
