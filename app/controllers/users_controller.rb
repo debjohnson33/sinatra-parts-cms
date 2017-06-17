@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 		end
 
 		if errors.empty?
-			@user = User.create(username: params[:username], email: params[:email], password: [:password])
+			@user = User.create(username: params[:username], email: params[:email], password: params[:password])
 			redirect '/parts/index'
 		else
 			flash[:message] = errors
