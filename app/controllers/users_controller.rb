@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	get '/signup' do
-		erb :'/users/signup'
+		erb :'/users/signup', locals: { user: User.new}
 	end
 	
 	post '/signup' do

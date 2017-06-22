@@ -1,27 +1,7 @@
-<% if @user.errors.any? %>
-	<div id="error_explanation">
-		<h2>There were some errors:</h2>
-		<ul>
-			<% @user.errors.each do |error| %>
-			<li><%= message %></li>
-			<% end %>
-		</ul>	
-	</div>
-<% end %>
-
 <h2>Sign up:</h2>
 
 <form action="/signup" method="post">
-	<% if @user.errors.any? %>
-	<div id="error_explanation">
-		<h2>There were some errors:</h2>
-		<ul>
-			<% @user.errors.each do |error| %>
-			<li><%= message %></li>
-			<% end %>
-		</ul>	
-	</div>
-	<% end %>
+
 
 	<div class="field<%= ' field_with_errors' if @user.errors[:username].any? %>">
 	<label>Username:</label>
