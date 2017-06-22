@@ -1,43 +1,38 @@
 class UsersController < ApplicationController
 	get '/signup' do
-		erb :'/users/signup', locals: { user: User.new}
+		if logged_in?
+			redirect '/parts/index'
+		else
+			erb :'/users/signup'
+		end
 	end
 	
 	post '/signup' do
-		@user = User.create(username: params[:username], email: params[:email], password: params[:password])
-		if @user.valid?
-			@user.save
-
-			redirect '/parts/index'
-
-		else
-			render :signup
+		errors = Hash.new
+		
+		if params[:username].empty?
+			errors[:username] = "Username should not be blank"
+		elsif User.find_by(username: params[:username])
+			errors[:username] = "Username is already taken"
 		end
-#		errors = Hash.new
-#		
-#		if params[:username].empty?
-#			errors[:username] = "Username should not be blank"
-#		elsif User.find_by(username: params[:username])
-#			errors[:username] = "Username is already taken"
-#		end
-#
-#		if params[:email].empty?
-#			errors[:email] = "Email should not be blank"
-#		elsif User.find_by(email: params[:email])
-#			errors[:email] = "Email is already being used"
-#		end
-#
-#		if params[:password].empty?
-#			errors[:password] = "Password should not be blank"
-#		end
-#
-#		if errors.empty?
-#			@user = User.create(username: params[:username], email: params[:email], password: params[:password])
-#			redirect '/parts/index'
-#		else
-#			flash[:message] = errors
-#			redirect '/signup'
-#		end
+
+		if params[:email].empty?
+			errors[:email] = "Email should not be blank"
+		elsif User.find_by(email: params[:email])
+			errors[:email] = "Email is already being used"
+		end
+
+		if params[:password].empty?
+			errors[:password] = "Password should not be blank"
+		end
+
+		if errors.empty?
+			@user = User.create(username: params[:username], email: params[:email], password: params[:password])
+			redirect '/parts/index'
+		else
+			flash[:message] = errors
+			redirect '/signup'
+		end
 	end
 
 	get '/login' do

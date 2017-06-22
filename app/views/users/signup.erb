@@ -2,12 +2,11 @@
 
 <form action="/signup" method="post">
 
-
-	<div class="field<%= ' field_with_errors' if @user.errors[:username].any? %>">
 	<label>Username:</label>
 	<input type="text" name="username" id="username"><br>
-
-	</div>
+	<% if flash.has?(:message) && flash[:message][:username] %>
+  		<%= flash[:message][:username] %>
+	<% end %>
 
 	<br><br/>
 	<label>Email:</label>
