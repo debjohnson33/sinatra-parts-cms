@@ -1,8 +1,12 @@
 class PartsController < ApplicationController
 	get	'/parts/index' do
 		@user = current_user
-		@parts = @user.parts
-		erb :'/parts/index'
+		if @user
+			@parts = @user.parts
+			erb :'/parts/index'
+		else
+			erb :'users/login'
+		end
 	end
 
 
