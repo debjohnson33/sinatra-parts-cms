@@ -1,6 +1,6 @@
 users = [
 	{username: 'Test', email: 'test@email.com', password: 'Test'},
-	{username: 'Test2, email: 'test2@email.com, password: 'Test2'}	
+	{username: 'Test2', email: 'test2@email.com', password: 'Test2'}	
 ]
 
 manufacturers = [
