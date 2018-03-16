@@ -18,7 +18,7 @@ users.each do |u|
 end
 
 manufacturers.each do |m|
-	Manufacturer.create(u)
+	Manufacturer.create(m)
 end
 
 parts.each do |p|
