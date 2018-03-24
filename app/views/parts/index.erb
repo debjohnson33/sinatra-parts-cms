@@ -5,7 +5,7 @@
 <h2>Parts for <%= @user.username %></h2>
 <br />
 <% @parts.each do |part| %>
- Name: <%= part.name %><br />
+ Name: <a href='/parts/<%= part.id %>'><%= part.name %></a><br />
  Manufacturer: <%= part.manufacturer.name %> <br />
  Serial Number: <%= part.serial_number %><br />
  Quantity: <%= part.quantity %><br />
