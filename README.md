@@ -1,6 +1,8 @@
 # Parts Management System
 
-This Sinatra app allows a user to sign up and keep track of the parts they have in stock. It is built in a generic way so each user can have different types of parts; i.e. one user with auto parts and another user with small enginge parts.
+This Sinatra app allows a user to sign up and keep track of the parts they have in stock. It is built in a generic way so each user can have different types of parts; i.e. one user with auto parts and another user with small enginge parts. To see the app on heroku go to:
+
+http://sinatra-parts-cms.herokuapp.com/  (Username: Test Password: Test)
 
 ## Installation
 
