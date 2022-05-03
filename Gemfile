@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.3.4'
 
-gem 'sinatra', "~> 2.0.2" 
+gem 'sinatra', "~> 2.2.0" 
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
